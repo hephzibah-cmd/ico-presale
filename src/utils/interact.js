@@ -9,7 +9,7 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 */
 //const web3 = new Web3(`https://polygon-mumbai.infura.io/v3/${INFURAKEY}`);
-const web3 = new Web3(`https://polygon-mumbai.infura.io/v3/ad6b3a00b3a848e1a3d78f824694b064`);
+const web3 = new Web3(`https://polygon-mumbai.infura.io/v3/`);
 
 
 const contractABI = require('../presale.json')
