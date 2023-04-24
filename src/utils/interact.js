@@ -1,19 +1,21 @@
 
 require('dotenv').config();
 
-const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
+const INFURAKEY = process.env.KEY;
 
 const Web3 = require('web3');
 /*
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 */
-const web3 = new Web3("https://data-seed-prebsc-2-s3.binance.org:8545/");
+//const web3 = new Web3(`https://polygon-mumbai.infura.io/v3/${INFURAKEY}`);
+const web3 = new Web3(`https://polygon-mumbai.infura.io/v3/ad6b3a00b3a848e1a3d78f824694b064`);
+
 
 const contractABI = require('../presale.json')
-const contractAddress = "0x082dE4295c7d44495A9fa697b826fFa3214A52A4";
+const contractAddress = "0x86E01980F4EC6313F1a5e6d048D4D5453556F42D";
 
-const { pinJSONToIPFS } = require('./pinata.js');
+//const { pinJSONToIPFS } = require('./pinata.js');
 const BN = require('bn.js');
 
 export const connectWallet = async () => {
@@ -61,7 +63,7 @@ export const getCurrentWalletConnected = async () => {
             if (addressArray.length > 0) {
                 return {
                     address: addressArray[0],
-                    status: "👆🏽 Put BNB Amount in the text-field above.",
+                    status: "👆🏽 Put ETH Amount in the text-field above.",
                 }
             } else {
                 return {
@@ -123,7 +125,7 @@ export const buyToken = async (bnbAmount) => {
             });
         return {
             success: true,
-            status: "✅ Check out your transaction on bscscan: https://testnet.bscscan.com/tx/" + txHash
+            status: "✅ Check out your transaction on mumbaiscan: https://mumbai.polygonscan.com/tx/" + txHash
         }
     } catch (error) {
         return {

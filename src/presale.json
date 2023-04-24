@@ -8,7 +8,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "_tokenvalue",
+                "name": "_tokenPrice",
                 "type": "uint256"
             }
         ],

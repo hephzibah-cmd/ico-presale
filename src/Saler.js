@@ -7,10 +7,10 @@ const Saler = (props) => {
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
   const [name, setName] = useState("");
-  const [bnbAmount, setBNBAmount] = useState(0);
+  const [ethAmount, setETHAmount] = useState(0);
   const [tokenAmount, setTokenAmount] = useState(0);
   const [description, setDescription] = useState("");
-  const [raisedBNB, setRaisedBNB] = useState(0);
+  const [raisedETH, setRaisedETH] = useState(0);
   const [url, setURL] = useState("");
  
   useEffect(async () => { //TODO: implement
@@ -22,12 +22,12 @@ const Saler = (props) => {
   }, []);
 
   useEffect(() => {
-    setTokenAmount(5000 * bnbAmount);
-  }, [bnbAmount])
+    setTokenAmount(ethAmount / 0.00001);
+  }, [ethAmount])
 
   useEffect(async () => {
     let raisedAmount = await getTotalRaisedAmount();
-    setRaisedBNB(raisedAmount);
+    setRaisedETH(raisedAmount);
     console.log("raisedAmount =", raisedAmount);
   }, [status])
 
@@ -38,7 +38,7 @@ const Saler = (props) => {
   };
 
   const onBuyPressed = async () => { //TODO: implement
-    const { status } = await buyToken(bnbAmount);
+    const { status } = await buyToken(ethAmount);
     setStatus(status);
   };
 
@@ -47,7 +47,7 @@ const Saler = (props) => {
       window.ethereum.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
           setWallet(accounts[0]);
-          setStatus("👆🏽 Put BNB Amount in the text-field above.");
+          setStatus("👆🏽 Put ETH Amount in the text-field above.");
         } else {
           setWallet("");
           setStatus("🦊 Connect to Metamask using the top right button.");
@@ -79,26 +79,26 @@ const Saler = (props) => {
           <span>Connect Wallet</span>
         )}
       </button>
-      <h2>(5, 000 NVD per 1 BNB) </h2>
-      <h1>Total Raised: {raisedBNB} BNB</h1>
-      <h1>Total Token Sold: {raisedBNB*5000} NVD</h1>
+      <h2>(0.00001ETH per $torm) </h2>
+      <h1>Total Raised: {raisedETH} ETH</h1>
+      <h1>Total Token Sold: {raisedETH*100000} $TORM</h1>
       <br></br>
       <form>
-        <h1>BNB value</h1>
+        <h1>ETH value</h1>
         <input
           type="text"
           placeholder="0"
-          value={bnbAmount}
-          onChange={(event) => setBNBAmount(event.target.value)}
+          value={ethAmount}
+          onChange={(event) => setETHAmount(event.target.value)}
         />
       </form>
       <h1>
-        NVD Amount :
-        { tokenAmount } NVD
+        $TORM Amount :
+        { tokenAmount } $TORM
       </h1>
 
       <button id="mintButton" onClick={onBuyPressed}>
-        BUY NVD Token
+        BUY $TORM Token
       </button>
       <p id="status">
         {status}
